@@ -48,10 +48,12 @@ func StartServer() {
 
 	journies.Get("", ctrl.GetJournies)
 	journies.Post("", ctrl.PostJourney)
+	journies.Get("/:departure-:return", ctrl.GetJourniesBySchedule)
 	journies.Get("/:id", ctrl.GetJourneyById)
 
 	station.Get("", ctrl.GetStations)
 	station.Post("", ctrl.PostStation)
+	station.Get("/suggest", ctrl.GetStationsSuggest)
 	station.Get("/:id", ctrl.GetStationById)
 
 	admin.Post("/import-journies/:id", ctrl.ImportJournies)
