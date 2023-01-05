@@ -9,7 +9,7 @@ import (
 	"os"
 
 	"solita_back/src/config"
-
+	constants "solita_back/src/libs"
 	m "solita_back/src/models"
 	u "solita_back/src/utils"
 
@@ -29,7 +29,7 @@ func ImportStations(c *fiber.Ctx) error {
 			SendString("Failed to reset table before insert")
 	}
 
-	file, err := os.Open(fileStationPath)
+	file, err := os.Open(constants.FileStationPath)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).
 			SendString("Failed to open file to import")

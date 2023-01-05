@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"solita_back/src/config"
+	constants "solita_back/src/libs"
 
 	m "solita_back/src/models"
 	u "solita_back/src/utils"
@@ -39,7 +40,7 @@ func ImportJournies(c *fiber.Ctx) error {
 		}
 	}
 
-	file, err := os.Open(fileJourneyPaths[nid])
+	file, err := os.Open(constants.FileJourneyPaths[nid])
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).
 			SendString("Failed to open file to import")
