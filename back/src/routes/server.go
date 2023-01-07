@@ -1,8 +1,6 @@
-package router
+package routes
 
 import (
-	"log"
-
 	conf "solita_back/src/config"
 	ctrl "solita_back/src/controllers"
 
@@ -14,7 +12,7 @@ import (
 	"github.com/gofiber/helmet/v2"
 )
 
-func StartServer() {
+func StartServer() *fiber.App {
 	// Load env
 	conf.LoadEnv()
 
@@ -48,17 +46,16 @@ func StartServer() {
 
 	journies.Get("", ctrl.GetJournies)
 	journies.Post("", ctrl.PostJourney)
-	journies.Get("/:departure-:return", ctrl.GetJourniesBySchedule)
-	journies.Get("/:id", ctrl.GetJourneyById)
+	journies.Get("/:departure<int>-:return<int>", ctrl.GetJourniesBySchedule)
+	journies.Get("/:id<int>", ctrl.GetJourneyById)
 
 	station.Get("", ctrl.GetStations)
 	station.Post("", ctrl.PostStation)
 	station.Get("/suggest", ctrl.GetStationsSuggest)
-	station.Get("/:id", ctrl.GetStationById)
+	station.Get("/:id<int>", ctrl.GetStationById)
 
-	admin.Post("/import-journies/:id", ctrl.ImportJournies)
+	admin.Post("/import-journies/:id<int>", ctrl.ImportJournies)
 	admin.Post("/import-stations", ctrl.ImportStations)
 
-	// Start server
-	log.Println(r.Listen(":3001"))
+	return r
 }

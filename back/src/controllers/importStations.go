@@ -9,7 +9,8 @@ import (
 	"os"
 
 	"solita_back/src/config"
-	constants "solita_back/src/libs"
+
+	"solita_back/src/libs"
 	m "solita_back/src/models"
 	u "solita_back/src/utils"
 
@@ -22,6 +23,7 @@ func ImportStations(c *fiber.Ctx) error {
 	// Start connection with database
 	ctx := context.Background()
 	db := config.Connect()
+	defer db.Close()
 
 	// Reset or create station table if it was not created
 	if err := db.ResetModel(ctx, (*m.StationTable)(nil)); err != nil {
@@ -29,7 +31,7 @@ func ImportStations(c *fiber.Ctx) error {
 			SendString("Failed to reset table before insert")
 	}
 
-	file, err := os.Open(constants.FileStationPath)
+	file, err := os.Open(libs.FileStationPath)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).
 			SendString("Failed to open file to import")
@@ -73,13 +75,23 @@ func ImportStations(c *fiber.Ctx) error {
 		   11 x
 		   12 y */
 
+		idInt := int(u.ToFloat(rec[1]))
+		capInt := int(u.ToFloat(rec[10]))
+		xFloat := u.ToFloat(rec[11])
+		yFloat := u.ToFloat(rec[12])
+
+		if idInt == -1 || capInt == -1 || xFloat == -1 || yFloat == -1 {
+			return c.Status(http.StatusInternalServerError).
+				SendString("Failed to parse information from file")
+		}
+
 		row := m.StationTable{
-			Id:         int(u.ToFloat(rec[1])),
+			Id:         idInt,
 			Name:       rec[4],
 			Address:    rec[6],
-			Capacities: int(u.ToFloat(rec[10])),
-			X:          u.ToFloat(rec[11]),
-			Y:          u.ToFloat(rec[12]),
+			Capacities: capInt,
+			X:          xFloat,
+			Y:          yFloat,
 		}
 
 		records = append(records, row)

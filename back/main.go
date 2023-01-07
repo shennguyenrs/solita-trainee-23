@@ -3,5 +3,6 @@ package main
 import "solita_back/src/routes"
 
 func main() {
-	router.StartServer()
+	app := routes.StartServer()
+	app.Listen(":3001")
 }

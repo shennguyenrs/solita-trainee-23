@@ -11,7 +11,8 @@ import (
 	"time"
 
 	"solita_back/src/config"
-	constants "solita_back/src/libs"
+
+	"solita_back/src/libs"
 
 	m "solita_back/src/models"
 	u "solita_back/src/utils"
@@ -31,6 +32,7 @@ func ImportJournies(c *fiber.Ctx) error {
 	// Start connection with database
 	ctx := context.Background()
 	db := config.Connect()
+	defer db.Close()
 
 	// Reset or create table if it not created
 	if nid == 0 {
@@ -40,7 +42,7 @@ func ImportJournies(c *fiber.Ctx) error {
 		}
 	}
 
-	file, err := os.Open(constants.FileJourneyPaths[nid])
+	file, err := os.Open(libs.FileJourneyPaths[nid])
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).
 			SendString("Failed to open file to import")
@@ -114,6 +116,11 @@ func ImportJournies(c *fiber.Ctx) error {
 		rtnId := u.ToFloat(rec[4])
 		distance := u.ToFloat(rec[6])
 		duration := u.ToFloat(rec[7])
+
+		if depId == -1 || rtnId == -1 || distance == -1 || duration == -1 {
+			return c.Status(http.StatusInternalServerError).
+				SendString("Failed to parse information from file")
+		}
 
 		row := m.JourneyTable{
 			Departure:          depTime,
