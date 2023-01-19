@@ -36,10 +36,10 @@ func PaginationQuery(q *bun.SelectQuery, f *PaginationStruct) (*bun.SelectQuery,
 		q = q.
 			ColumnExpr("j.*").
 			ColumnExpr("departure.name AS departure_station_name").
-			ColumnExpr("return.name as return_station_name").
-			Join("INNER JOIN stations as departure").
+			ColumnExpr("return.name AS return_station_name").
+			Join("INNER JOIN stations AS departure").
 			JoinOn("departure.id = j.departure_station_id").
-			Join("INNER JOIN stations as return").
+			Join("INNER JOIN stations AS return").
 			JoinOn("return.id = j.return_station_id")
 	}
 

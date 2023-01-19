@@ -7,7 +7,7 @@ import (
 )
 
 type Journey struct {
-	bun.BaseModel        `bun:"table:journies,alias:j"`
+	bun.BaseModel        `bun:"table:distinct_journies,alias:j"`
 	Id                   int       `bun:",pk,autoincrement" json:"id"`
 	Departure            time.Time `bun:",notnull" json:"departure"`
 	Return               time.Time `bun:",notnull" json:"return"`
@@ -20,7 +20,7 @@ type Journey struct {
 }
 
 type JourneyTable struct {
-	bun.BaseModel      `bun:"table:journies,alias:j"`
+	bun.BaseModel      `bun:"table:distinct_journies,alias:j"`
 	Id                 int       `validate:"omitempty" bun:",pk,autoincrement" json:"id"`
 	Departure          time.Time `validate:"required,datetime" bun:",notnull" json:"departure"`
 	Return             time.Time `validate:"required,datetime" bun:",notnull" json:"return"`
@@ -31,6 +31,6 @@ type JourneyTable struct {
 }
 
 type ReturnJournies struct {
-	Data       []Journey
-	Pagination Pagination
+	Data       []Journey  `json:"data"`
+	Pagination Pagination `json:"pagination"`
 }

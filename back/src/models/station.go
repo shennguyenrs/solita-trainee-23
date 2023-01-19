@@ -19,6 +19,6 @@ type StationSuggest struct {
 }
 
 type ReturnStations struct {
-	Data       []StationTable
-	Pagination Pagination
+	Data       []StationTable `json:"data"`
+	Pagination Pagination     `json:"pagination"`
 }

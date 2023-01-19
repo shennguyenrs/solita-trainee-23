@@ -49,7 +49,9 @@ func GetJournies(c *fiber.Ctx) error {
 	}
 
 	// Count all records
-	count, error := db.NewSelect().Model((*m.JourneyTable)(nil)).Count(ctx)
+	count, error := db.NewSelect().
+		Model((*m.JourneyTable)(nil)).
+		Count(ctx)
 	if error != nil {
 		return c.Status(http.StatusInternalServerError).
 			SendString("Failed to count all records")
