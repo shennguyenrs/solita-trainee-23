@@ -10,4 +10,15 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./postgres/persist:/var/lib/postgresql
+      - ./postgres/db:/var/lib/postgresql/data
+
+  backend:
+    image: backend
+    container_name: backend
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    env_file:
+      - ./back/.env
+    ports:
+      - 3001:3001
