@@ -41,7 +41,7 @@ func StartServer() *fiber.App {
 	// Routes
 	v1 := r.Group("/api/v1")
 	journies := v1.Group("/journies")
-	station := v1.Group("/stations")
+	stations := v1.Group("/stations")
 	admin := v1.Group("/admin")
 
 	journies.Get("", ctrl.GetJournies)
@@ -49,10 +49,12 @@ func StartServer() *fiber.App {
 	journies.Get("/:departure<int>-:return<int>", ctrl.GetJourniesBySchedule)
 	journies.Get("/:id<int>", ctrl.GetJourneyById)
 
-	station.Get("", ctrl.GetStations)
-	station.Post("", ctrl.PostStation)
-	station.Get("/suggest", ctrl.GetStationsSuggest)
-	station.Get("/:id<int>", ctrl.GetStationById)
+	stations.Get("", ctrl.GetStations)
+	stations.Post("", ctrl.PostStation)
+	stations.Get("/suggest", ctrl.GetStationsSuggest)
+	stations.Get("/:id<int>", ctrl.GetStationById)
+	stations.Get("/:id<int>/journies/starting-from", ctrl.GetJourniesStartingFrom)
+	stations.Get("/:id<int>/journies/ending-at", ctrl.GetJourniesEndingAt)
 
 	admin.Post("/import-journies/:id<int>", ctrl.ImportJournies)
 	admin.Post("/import-stations", ctrl.ImportStations)

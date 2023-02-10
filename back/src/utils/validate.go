@@ -130,3 +130,46 @@ func ValidateStationsPagination(raw m.RawStationsPagination) []*ErrorResponse {
 
 	return errors
 }
+
+func ValidateJourniesFilterByStationPagination(raw m.JourniesFilterByStationPagination) []*ErrorResponse {
+	var errors []*ErrorResponse
+	err := validate.Struct(raw)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element ErrorResponse
+			element.FailedField = err.StructNamespace()
+			element.Tag = err.Tag()
+			element.Value = err.Param()
+			errors = append(errors, &element)
+		}
+	}
+
+	if len(errors) == 0 {
+		idInt, _ := strconv.Atoi(raw.StationId)
+		pageInt, _ := strconv.Atoi(raw.Page)
+		var element ErrorResponse
+
+		if idInt < 1 {
+			element.FailedField = raw.StationId
+			element.Tag = "gte=1"
+			errors = append(errors, &element)
+		}
+
+		if pageInt < 1 {
+			element.FailedField = raw.Page
+			element.Tag = "gte=1"
+			errors = append(errors, &element)
+		}
+
+		if len(raw.Show) > 0 {
+			showInt, _ := strconv.Atoi(raw.Show)
+			if showInt < 1 {
+				element.FailedField = raw.Show
+				element.Tag = "gte=1"
+				errors = append(errors, &element)
+			}
+		}
+	}
+
+	return errors
+}
