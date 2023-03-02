@@ -17,7 +17,7 @@ func PostJourney(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(newJourney); err != nil {
 		return c.Status(http.StatusBadRequest).
-			SendString("Failed to parser reuqest body")
+			SendString("Failed to parser request body")
 	}
 
 	// Check new id

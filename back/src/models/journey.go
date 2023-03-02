@@ -22,10 +22,10 @@ type Journey struct {
 type JourneyTable struct {
 	bun.BaseModel      `bun:"table:distinct_journies,alias:j"`
 	Id                 int       `validate:"omitempty" bun:",pk,autoincrement" json:"id"`
-	Departure          time.Time `validate:"required,datetime" bun:",notnull" json:"departure"`
-	Return             time.Time `validate:"required,datetime" bun:",notnull" json:"return"`
+	Departure          time.Time `validate:"required" bun:",notnull" json:"departure"`
+	Return             time.Time `validate:"required" bun:",notnull" json:"return"`
 	DepartureStationID int       `validate:"required,numeric" bun:",notnull" json:"departureStationId"`
-	ReturnStationID    int       `validate:"required,numeric" bun:",notnull" json:"returnStationID"`
+	ReturnStationID    int       `validate:"required,numeric" bun:",notnull" json:"returnStationId"`
 	CoveredDistance    float64   `validate:"required,numeric" bun:",notnull" json:"coveredDistance"`
 	Duration           float64   `validate:"required,numeric" bun:",notnull" json:"duration"`
 }
