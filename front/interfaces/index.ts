@@ -8,6 +8,8 @@ export interface STATION_INFO {
   y: number;
 }
 
+export type STATION_NAME = Pick<STATION_INFO, 'id' | 'name'>;
+
 export enum STATIONS_FIELDS {
   ID = 'id',
   NAME = 'name',

@@ -40,12 +40,12 @@ The technologies are used in the solution:
   Journies:
 
   - [x] List of all journies
-  - [ ] Search journies using starting point and end point
+  - [x] Search journies using starting point and end point
   - [ ] Add new journey
 
   Stations:
 
   - [x] List of all stations
   - [x] Single station view
-  - [ ] Search station by name
+  - [x] Search station by name
   - [ ] Add new station

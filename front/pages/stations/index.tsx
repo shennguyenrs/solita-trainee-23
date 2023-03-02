@@ -2,7 +2,7 @@ import { Box, Flex, Spacer } from '@chakra-ui/react';
 import type { ReactElement } from 'react';
 import { Header, Layout } from '../../components';
 import PaginationTable from '../../components/PaginationTable';
-import { AddStation } from '../../components/stations';
+import { AddStation, SearchStation } from '../../components/stations';
 import { stationsFields } from '../../libs/constants';
 
 export default function Stations(): ReactElement {
@@ -21,7 +21,8 @@ export default function Stations(): ReactElement {
             </li>
           </ul>
         </Box>
-        <Flex flexDirection="row" alignItems="center" my="8">
+        <Flex flexDirection="row" alignItems="center" my="8" gap="4">
+          <SearchStation />
           <AddStation />
           <Spacer />
         </Flex>

@@ -41,6 +41,16 @@ export default function DataTable({
       );
     }
 
+    if (!Boolean(data.length)) {
+      return (
+        <Tr>
+          <Td colSpan={fields.length} textAlign="center">
+            There is no data!
+          </Td>
+        </Tr>
+      );
+    }
+
     return fields.length === stationsFieldsLength ? (
       <>
         {(data as STATION_INFO[])?.map((i) => (
