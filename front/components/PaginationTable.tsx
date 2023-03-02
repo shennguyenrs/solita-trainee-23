@@ -6,7 +6,7 @@ import {
   RxChevronRight,
   RxDoubleArrowLeft,
   RxDoubleArrowRight,
-  RxReset,
+  RxReset
 } from 'react-icons/rx';
 import useSWR, { Fetcher } from 'swr';
 import wretch from 'wretch';
@@ -82,7 +82,7 @@ export default function PaginationTable({
             onChange={(e) => setPagi({ ...pagi, order: e.target.value })}
           >
             {tableFields.map((i, idx) => (
-              <option key={idx} value={i.label}>
+              <option key={idx} value={i.value}>
                 {i.label.toUpperCase()}
               </option>
             ))}

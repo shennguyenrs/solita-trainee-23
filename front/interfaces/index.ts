@@ -66,5 +66,6 @@ export enum SORT_BY {
 
 export interface DATA_FIELD {
   label: string;
+  value: string;
   isNumberic: boolean;
 }

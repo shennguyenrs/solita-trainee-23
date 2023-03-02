@@ -1,60 +1,71 @@
-import { DATA_FIELD, SORT_BY } from "../interfaces";
+import { DATA_FIELD, SORT_BY } from '../interfaces';
 
 export const initialPagiPara = {
   currentPage: 1,
   show: 10,
-  order: "id",
+  order: 'id',
   sort: SORT_BY.ASC,
 };
 
 export const journiesFields: DATA_FIELD[] = [
-  { label: "id", isNumberic: true },
+  { label: 'id', value: 'id', isNumberic: true },
   {
-    label: "departure",
+    label: 'departure',
+    value: 'departure',
     isNumberic: false,
   },
   {
-    label: "depature station",
+    label: 'depature station',
+    value: 'departure_station_name',
     isNumberic: false,
   },
   {
-    label: "return",
+    label: 'return',
+    value: 'return',
     isNumberic: false,
   },
   {
-    label: "return station",
+    label: 'return station',
+    value: 'return_station_name',
     isNumberic: false,
   },
   {
-    label: "covered distance (m)",
+    label: 'covered distance (m)',
+    value: 'covered_distance',
     isNumberic: true,
   },
   {
-    label: "duration (sec.)",
+    label: 'duration (sec.)',
+    value: 'duration',
     isNumberic: true,
   },
 ];
 
 export const stationsFields: DATA_FIELD[] = [
-  { label: "id", isNumberic: true },
+  { label: 'id', value: 'id', isNumberic: true },
   {
-    label: "name",
+    label: 'name',
+    value: 'name',
     isNumberic: false,
   },
   {
-    label: "address",
+    label: 'address',
+    value: 'address',
     isNumberic: false,
   },
   {
-    label: "capacities",
+    label: 'capacities',
+    value: 'capacities',
     isNumberic: true,
   },
   {
-    label: "x",
+    label: 'x',
+    value: 'x',
     isNumberic: true,
   },
   {
-    label: "y",
+    label: 'y',
+    value: 'y',
     isNumberic: true,
   },
 ];
