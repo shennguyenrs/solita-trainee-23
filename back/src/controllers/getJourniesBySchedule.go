@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gofiber/fiber/v2"
-
 	"solita_back/src/config"
 	"solita_back/src/libs"
+
+	"github.com/gofiber/fiber/v2"
+
 	m "solita_back/src/models"
 	u "solita_back/src/utils"
 )
@@ -64,7 +65,7 @@ func GetJourniesBySchedule(c *fiber.Ctx) error {
 	allPages := math.Ceil(float64(count) / showFloat)
 
 	// Get pagination results
-	var found []m.Journey
+	found := []m.Journey{}
 	f := libs.PaginationStruct{
 		TableName: libs.Journies,
 		PageInt:   pageInt,
@@ -74,8 +75,8 @@ func GetJourniesBySchedule(c *fiber.Ctx) error {
 	}
 
 	q, err := libs.PaginationQuery(
-    db.NewSelect().Model(&found).
-    Where("departure_station_id = ? AND return_station_id = ?", departureIdInt, returnIdInt), &f)
+		db.NewSelect().Model(&found).
+			Where("departure_station_id = ? AND return_station_id = ?", departureIdInt, returnIdInt), &f)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).
 			SendString("Failed to create query to get result")

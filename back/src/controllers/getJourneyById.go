@@ -25,7 +25,7 @@ func GetJourneyById(c *fiber.Ctx) error {
 	db := config.Connect()
 	defer db.Close()
 
-	var result []m.JourneyTable
+	result := []m.JourneyTable{}
 
 	err = db.NewSelect().Model(&result).Where("id = ?", id).Scan(ctx)
 	if err != nil {

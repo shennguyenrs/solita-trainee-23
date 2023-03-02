@@ -14,7 +14,7 @@ import (
 
 func GetStationsSuggest(c *fiber.Ctx) error {
 	name := c.Query("name")
-	var result []m.StationSuggest
+	result := []m.StationSuggest{}
 
 	if name == "" {
 		return c.Status(http.StatusOK).JSON(result)

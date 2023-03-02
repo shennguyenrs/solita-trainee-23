@@ -60,7 +60,7 @@ func GetJournies(c *fiber.Ctx) error {
 	allPages := math.Ceil(float64(count) / showFloat)
 
 	// Get pagination results
-	var results []m.Journey
+	results := []m.Journey{}
 	f := libs.PaginationStruct{
 		TableName: libs.Journies,
 		PageInt:   pageInt,

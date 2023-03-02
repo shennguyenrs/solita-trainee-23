@@ -81,7 +81,7 @@ func GetStationById(c *fiber.Ctx) error {
 	}
 
 	// Top 5 popular return stations that starting from this station
-	var topStationsStartingFrom []TopStationsStartingFrom
+	topStationsStartingFrom := []TopStationsStartingFrom{}
 	if err := db.NewSelect().
 		ColumnExpr("j.return_station_id, s.name").
 		ColumnExpr("count(*) as total").
@@ -98,7 +98,7 @@ func GetStationById(c *fiber.Ctx) error {
 	}
 
 	// Top 5 popular departure stations that endind at this station
-	var topStationsEndingAt []TopStationsEndingAt
+	topStationsEndingAt := []TopStationsEndingAt{}
 	if err := db.NewSelect().
 		ColumnExpr("j.departure_station_id, s.name").
 		ColumnExpr("count(*) as total").

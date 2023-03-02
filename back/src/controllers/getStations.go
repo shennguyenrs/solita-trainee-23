@@ -4,9 +4,10 @@ import (
 	"context"
 	"math"
 	"net/http"
+	"strconv"
+
 	"solita_back/src/config"
 	"solita_back/src/libs"
-	"strconv"
 
 	u "solita_back/src/utils"
 
@@ -56,7 +57,7 @@ func GetStations(c *fiber.Ctx) error {
 	allPages := math.Ceil(float64(count) / showFloat)
 
 	// Get pagination results
-	var results []m.StationTable
+	results := []m.StationTable{}
 	f := libs.PaginationStruct{
 		TableName: libs.Stations,
 		PageInt:   pageInt,

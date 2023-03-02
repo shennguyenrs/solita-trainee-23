@@ -63,7 +63,7 @@ func GetJourniesStartingFrom(c *fiber.Ctx) error {
 	allPages := math.Ceil(float64(count) / showFloat)
 
 	// Get all journies that starting from this station
-	var results []m.Journey
+	results := []m.Journey{}
 	f := libs.PaginationStruct{
 		TableName: libs.Journies,
 		PageInt:   pageInt,
