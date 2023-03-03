@@ -22,6 +22,8 @@ import getConfig from 'next/config';
 import wretch from 'wretch';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useAtom } from 'jotai';
+import { showLoadingAtom } from '../../libs/atoms';
 
 interface ADD_STATION_FORM_DATA {
   id: number;
@@ -65,6 +67,7 @@ const stationFormFields: STATION_FORM_FIELD[] = [
 ];
 
 export default function AddStation(): ReactElement {
+  const [, setShow] = useAtom(showLoadingAtom);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const {
@@ -91,6 +94,8 @@ export default function AddStation(): ReactElement {
   };
 
   const onSubmit = async (values: ADD_STATION_FORM_DATA) => {
+    setShow(true);
+
     try {
       const res = await wretch(publicRuntimeConfig.BASE_API + '/stations')
         .post(values)
@@ -115,6 +120,8 @@ export default function AddStation(): ReactElement {
         isClosable: true,
       });
     }
+
+    setShow(false);
   };
 
   return (

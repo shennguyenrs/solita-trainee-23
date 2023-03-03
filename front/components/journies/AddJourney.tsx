@@ -15,12 +15,14 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import { useAtom } from 'jotai';
 import getConfig from 'next/config';
 import { ReactElement, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { RxPlus } from 'react-icons/rx';
 import wretch from 'wretch';
 import { STATION_NAME } from '../../interfaces';
+import { showLoadingAtom } from '../../libs/atoms';
 import InputSuggest from '../InputSuggest';
 
 interface ADD_JOURNEY_FORM_DATA {
@@ -40,6 +42,7 @@ export default function AddJourney(): ReactElement {
   );
   const [returnStation, setReturnStation] = useState<STATION_NAME | null>(null);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [, setShow] = useAtom(showLoadingAtom);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const {
@@ -70,6 +73,8 @@ export default function AddJourney(): ReactElement {
   };
 
   const onSubmit = async (values: ADD_JOURNEY_FORM_DATA) => {
+    setShow(true);
+
     if (departureStation && returnStation) {
       const formatedDeparture = new Date(values.departure);
       const formatedReturn = new Date(values.return);
@@ -114,6 +119,8 @@ export default function AddJourney(): ReactElement {
         isClosable: true,
       });
     }
+
+    setShow(false);
   };
 
   return (
