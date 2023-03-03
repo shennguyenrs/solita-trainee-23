@@ -17,7 +17,14 @@ func PostStation(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(newStation); err != nil {
 		return c.Status(http.StatusBadRequest).
-			SendString("Failed to parser reuqest body")
+			SendString("Failed to parser request body")
+	}
+
+	// Validate new station
+	errors := u.ValidateStation(*newStation)
+	if errors != nil {
+		return c.Status(http.StatusBadRequest).
+			SendString("Invalid new station information")
 	}
 
 	// Check new id
@@ -37,13 +44,6 @@ func PostStation(c *fiber.Ctx) error {
 	if found {
 		return c.Status(http.StatusBadRequest).
 			SendString("Duplidate new station id")
-	}
-
-	// Validate new station
-	errors := u.ValidateStation(*newStation)
-	if errors != nil {
-		return c.Status(http.StatusBadRequest).
-			SendString("Invalid new station information")
 	}
 
 	_, err = db.NewInsert().Model(newStation).Exec(ctx)
