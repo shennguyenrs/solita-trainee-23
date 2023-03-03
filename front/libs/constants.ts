@@ -44,12 +44,12 @@ export const journiesFields: DATA_FIELD[] = [
 export const stationsFields: DATA_FIELD[] = [
   { label: 'id', value: 'id', isNumberic: true },
   {
-    label: 'name',
+    label: 'station name',
     value: 'name',
     isNumberic: false,
   },
   {
-    label: 'address',
+    label: 'station address',
     value: 'address',
     isNumberic: false,
   },
