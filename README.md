@@ -41,11 +41,11 @@ The technologies are used in the solution:
 
   - [x] List of all journies
   - [x] Search journies using starting point and end point
-  - [ ] Add new journey
+  - [x] Add new journey
 
   Stations:
 
   - [x] List of all stations
   - [x] Single station view
   - [x] Search station by name
-  - [ ] Add new station
+  - [x] Add new station
