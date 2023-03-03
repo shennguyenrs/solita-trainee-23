@@ -13,7 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import getConfig from 'next/config';
 import { ReactElement, useEffect, useState } from 'react';
@@ -87,18 +87,25 @@ export default function AddJourney(): ReactElement {
           .post(payload)
           .json();
 
-        console.log(res);
-      } catch (e) {
+        if (res) {
+          onClose();
+          reset();
+
+          toast({
+            status: 'success',
+            description: 'New journies saved',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      } catch (e: any) {
         toast({
-          status: 'error',
-          description: 'Something wrongs happens! Please try again!',
+          status: 'warning',
+          description: e.message,
           duration: 5000,
           isClosable: true,
         });
       }
-
-      // onClose();
-      // reset();
     } else {
       toast({
         status: 'warning',
