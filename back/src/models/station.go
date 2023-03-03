@@ -7,7 +7,7 @@ type StationTable struct {
 	Id            int     `validate:"required,min=1"  bun:",pk" json:"id"`
 	Name          string  `validate:"required" bun:",notnull" json:"name"`
 	Address       string  `validate:"required" bun:",notnull" json:"address"`
-	Capacities    int     `validate:"required,numeric" bun:",notnull" json:"capacities"`
+	Capacities    int     `validate:"required,numeric,min=1" bun:",notnull" json:"capacities"`
 	X             float64 `validate:"required,longitude" bun:",notnull" json:"x"`
 	Y             float64 `validate:"required,latitude" bun:",notnull" json:"y"`
 }
