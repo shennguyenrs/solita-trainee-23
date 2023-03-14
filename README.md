@@ -1,6 +1,8 @@
-# Solita Dev Adcademy 2023 Solution
+# My Solita Dev Adcademy 2023 Solution
 
 Link to the exercise: [GitHub](https://github.com/solita/dev-academy-2023-exercise)
+
+![Frame 1](https://user-images.githubusercontent.com/17680161/224968807-b90ba983-81ca-44fc-a1f5-29ddd985ae69.png)
 
 The technologies are used in the solution:
 
