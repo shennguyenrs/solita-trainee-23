@@ -7,7 +7,7 @@ The technologies are used in the solution:
 - Frontend: Next Js, Chakra UI
 - Backend: Golang, Go Fiber
 - Database: PostgreSQL
-- DevOps: Docker, AWS
+- DevOps: Docker, NGINX
 
 ### Completed functions
 
@@ -49,3 +49,40 @@ The technologies are used in the solution:
   - [x] Single station view
   - [x] Search station by name
   - [x] Add new station
+
+### How to run the application
+
+To run the application on the local machine, there are some requirements:
+
+- Docker is running on your machine
+- Environment variables for database, backend and frontend
+
+```
+// Place in postgres/.env
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=
+```
+
+```
+// Place in backend/.env
+DB_DSN=postgres://<POSTGRES_USER>:<POSTGRES_PASSWORD>@database:5432/<POSTGRES_DB>?sslmode=disable
+
+```
+
+```
+// Place in frontend/.env.production
+BACK_BASE_API=
+FRONT_BASE_API=
+GOOGLE_MAP_KEY=
+
+```
+
+If all prepared, the application can be run using the script:
+
+```
+sh ./run-prod.sh
+
+```
+
+NOTE: The backup file of database was not included in the repository. Contact me if you want to get it and put in the folder `posgrest/initdb.d`
