@@ -4,3 +4,5 @@ tmp
 .env
 *.csv
 *.sql
+front/.env.production
+postgres/initdb.d/binary_dump.pgdata
